@@ -39,15 +39,29 @@ export default class MoviesDAO{
     //We first check if the filters object contains the property title with filters.hasOwnProperty('title') .
     if(filters){
     if("title" in filters){
+     //. If so, we use the $text query operator together with $search
+// to search for movie titles containing the user specified search terms. $text also allows us to query using
+// multiple words by separating your words with spaces to query for documents that match any of the
+// search terms   
     query = { $text: { $search: filters['title']}}
+
+// check if user has specified the rated filter, we check if the user specified value is equal to the value in
+// the database field query = { "rated": filters['rated']}
     }else if("rated" in filters){
     query = { "rated": { $eq: filters['rated']}}
     }
     }
+
+// a cursor fetches these documents in batches to reduce both memory consumption and network
+// bandwidth usage
     let cursor
     try{
+// We then find all movies that fit our query and assign it to a cursor. If there is any error, we just return an
+// empty moviesList and totalNumMovies to be 0        
    cursor = await movies
    .find(query)
+//    we use the skip method together with limit. When skip and limit is used together, the skip
+// applies first and the limit only applies to the documents left over after the skip.
    .limit(moviesPerPage)
 .skip(moviesPerPage * page)
  const moviesList = await cursor.toArray()
