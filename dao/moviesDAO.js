@@ -21,7 +21,7 @@ export default class MoviesDAO{
  console.error(`unable to connect in MoviesDAO: ${e}`)
  }
  }
-
+//define method to access to all movies
 //  The getMovies method accepts a filter object as its first argument. The default filter has no filters, 
 //  retrieves results at page 0 and retrieves 20 movies per page.
 

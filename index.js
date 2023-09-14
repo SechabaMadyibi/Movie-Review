@@ -3,9 +3,12 @@ import mongodb from "mongodb"
 import dotenv from "dotenv"
 import MoviesDAO from './dao/moviesDAO.js'
 
+//We create an asynchronous function main() to connect to our MongoDB cluster and call functions that
+//access our database.
 async function main(){
+   // to load in the environment variables
  dotenv.config()
-
+//In the above, we create an instance of MongoClient and pass in the database URI.
 const client = new mongodb.MongoClient(
 process.env.MOVIEREVIEWS_DB_URI
  )
