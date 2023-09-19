@@ -29,7 +29,7 @@ reviewDAO: ${e}`)
                 user_id: user._id,
                 date: date,
                 review: review,
-                movie_id: new ObjectId(movieId)
+                movie_id:  ObjectId(movieId)
             }
             return await reviews.insertOne(reviewDoc)
         }
